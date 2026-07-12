@@ -124,6 +124,7 @@ All of these should live under `public/`, not loose in a staging folder:
 - `public/images/about/` — remaining carousel photos (converted from HEIC, see note below)
 - `public/resume/Toye_Adebayo_SWE_Resume.pdf`
 - `public/resume/Toye_Adebayo_PM_Resume.pdf`
+- Favicon (Phase 19): `public/favicon-face.svg` + `favicon-32x32.png` + `favicon-16x16.png` + `favicon.ico` (16/32/48 frames) — all four generated from the same source pixels: the skin's 8×8 face tile (base layer x8-16,y8-16 composited with the hat/hair overlay x40-48,y8-16), nearest-neighbor/exact-color only, no anti-aliasing. The old Vite default (`favicon.svg`, purple Vite mark) is deleted, not just unreferenced — confirmed 404 on that path in the built `dist/`. Regenerate with the composite-then-nearest-neighbor recipe above if the skin changes; hand-roll the `.ico` (raw PNG-frame container via `struct`) rather than Pillow's multi-size `save(sizes=...)`, which silently LANCZOS-blurs frames resized from the base image instead of using the crisp per-size source.
 
 Note: some source photos are `.HEIC` (Apple's format), which most browsers other than Safari can't render. Convert to `.jpg` before placing in `public/images/about/`. On Mac, no extra install needed: `sips -s format jpeg Picture3.HEIC --out Picture3.jpg`.
 

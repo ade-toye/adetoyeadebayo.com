@@ -1,0 +1,243 @@
+@import 'tailwindcss';
+
+/* "Minecraft" by Craftron Gaming (MIT via South-Paw/typeface-minecraft); known-good
+   copy from skinview3d's assets — the repo master's woff2 is corrupt (OTS rejection). */
+@font-face {
+  font-family: 'Minecraft';
+  src: url('/fonts/minecraft.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Caveat';
+  src: url('/fonts/Caveat-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-pixel: 'Minecraft', ui-monospace, monospace;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+  --color-mc-bg: #121214;
+  --color-mc-panel: #1e1e22;
+  --color-mc-border: #3f3f46;
+  --color-mc-text: #e4e4e7;
+  --color-mc-muted: #a1a1aa;
+  --color-mc-accent: #6dbf4b;
+  --color-mc-load: #d97706;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/* One-pager: the viewport is the page — scrolling is never permitted (Phase 10). */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-mc-bg);
+  /* Faint block grid so the dark base reads pixel-y without competing with content. */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--color-mc-text);
+  font-family: ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Pixel font is for headings only; body copy stays sans-serif for legibility. */
+h1,
+h2,
+h3 {
+  font-family: var(--font-pixel);
+}
+
+/* Chunky extruded block letters, Minecraft-logo style. Three tricks, in paint order
+   (earlier shadows render on top): (1) white shadows offset right/down fake a much
+   bolder face than the font really has; (2) a dark rim wraps the thickened face;
+   (3) a solid near-black wall drops straight down, two columns wide to match the
+   thickened face. Em-based so the same class scales for section headers. */
+.text-3d {
+  color: #ffffff;
+  text-shadow:
+    /* face thickening (faux-bold) */
+    0.02em 0 0 #ffffff,
+    0.04em 0 0 #ffffff,
+    0 0.02em 0 #ffffff,
+    0.02em 0.02em 0 #ffffff,
+    0.04em 0.02em 0 #ffffff,
+    /* thick dark rim around the thickened face */
+    -0.03em 0 0 #0a0a0d,
+    -0.03em 0.02em 0 #0a0a0d,
+    0.07em 0 0 #0a0a0d,
+    0.07em 0.02em 0 #0a0a0d,
+    0 -0.03em 0 #0a0a0d,
+    0.04em -0.03em 0 #0a0a0d,
+    /* extrusion wall: subtle lit top edge, then near-black, straight down */
+    0 0.045em 0 #35353b,
+    0.04em 0.045em 0 #35353b,
+    0 0.065em 0 #242429,
+    0.04em 0.065em 0 #242429,
+    0 0.085em 0 #1f1f24,
+    0.04em 0.085em 0 #1f1f24,
+    0 0.105em 0 #202025,
+    0.04em 0.105em 0 #202025,
+    0 0.125em 0 #1a1a1e,
+    0.04em 0.125em 0 #1a1a1e,
+    0 0.145em 0 #141417,
+    0.04em 0.145em 0 #141417,
+    0 0.165em 0 #0f0f12,
+    0.04em 0.165em 0 #0f0f12,
+    0 0.185em 0 #0a0a0d,
+    0.04em 0.185em 0 #0a0a0d,
+    /* hard black base edge, wrapping the wall like the rim wraps the face */
+    0.02em 0.205em 0 #050507;
+}
+
+/* Raised Minecraft-style button: light bevel top-left, dark bevel bottom-right. */
+.mc-button {
+  border: 2px solid #0c0c0e;
+  background-color: #3a3a40;
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.14),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+.mc-button:hover {
+  background-color: #45454c;
+}
+.mc-button:active {
+  box-shadow:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.45),
+    inset -2px -2px 0 rgba(255, 255, 255, 0.08);
+}
+.mc-button:focus-visible {
+  outline: 2px solid var(--color-mc-accent);
+  outline-offset: 2px;
+}
+
+/* Light stone-gray variant, matching the reference's main-menu buttons:
+   vertical gradient, strong top-left highlight bevel, dark bottom-right bevel. */
+.mc-button-light {
+  border: 2px solid #1a1a1c;
+  background: linear-gradient(#bfbfc1 0%, #a9a9ac 45%, #8e8e91 100%);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.4),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+/* Hover turns Minecraft-green — shared by nav and every future .mc-button-light. */
+.mc-button-light:hover {
+  background: linear-gradient(#69b754 0%, #55a341 45%, #47903a 100%);
+}
+.mc-button-light:active {
+  box-shadow:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.35),
+    inset -2px -2px 0 rgba(255, 255, 255, 0.25);
+}
+.mc-button-light:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ON state for settings toggles: Minecraft's enabled-green, same bevel. */
+.mc-button-on {
+  background-color: #4e9640;
+}
+.mc-button-on:hover {
+  background-color: #58a54a;
+}
+
+/* Buttons signal clickability with the cursor. */
+.mc-button,
+.mc-button-light {
+  cursor: pointer;
+}
+
+/* Gear-style buttons: cursor change only, no hover tint. Declared after
+   .mc-button:hover so it wins at equal specificity. */
+.mc-button-nohover:hover {
+  background-color: #3a3a40;
+}
+
+/* Modal close controls: neutral by default, red on hover — sitewide pattern
+   for every panel/modal close, not just the About page. */
+.mc-close {
+  color: var(--color-mc-muted);
+  cursor: pointer;
+}
+.mc-close:hover {
+  color: #ef4444;
+}
+.mc-close:focus-visible {
+  outline: 2px solid #ef4444;
+  outline-offset: 2px;
+}
+
+/* Sunken inventory-slot: bevel inverted relative to .mc-button. */
+.mc-slot {
+  border: 2px solid #0c0c0e;
+  background-color: #232327;
+  box-shadow:
+    inset 2px 2px 0 rgba(0, 0, 0, 0.5),
+    inset -2px -2px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Achievement toast: pixel-stepped slide in/out from the right edge. */
+@keyframes toast-in {
+  from {
+    transform: translateX(130%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes toast-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+.achievement-toast {
+  animation: toast-in 0.4s steps(10, end) both;
+}
+.achievement-toast.leaving {
+  animation: toast-out 0.45s steps(10, end) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .achievement-toast,
+  .achievement-toast.leaving {
+    animation: none;
+  }
+}
+
+/* Loading bar fills in visible chunks; real dismiss is driven by scene-ready in App. */
+@keyframes mc-load {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+.loading-bar {
+  animation: mc-load 4.5s steps(24, end) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loading-bar {
+    animation: none;
+    width: 90%;
+  }
+}

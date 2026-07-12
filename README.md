@@ -15,10 +15,10 @@ A Minecraft-themed personal portfolio site. Blocky UI, a 3D character that follo
 
 ## Pages
 
-- **About** — who I am, skills, a few photos
-- **Experience** — where I've worked and studied (hover or tap a card for details)
-- **Projects** — things I've built
-- **GitHub** — my profile
+- **About** - who I am, skills, a few photos
+- **Experience** - where I've worked and studied (hover or tap a card for details)
+- **Projects** - things I've built
+- **GitHub** - my profile
 
 ## Deploy
 

@@ -1,4 +1,4 @@
-# Adetoye Adebayo — Portfolio
+# Adetoye Adebayo - Portfolio
 
 A Minecraft-themed personal portfolio site. Blocky UI, a 3D character that follows your cursor, a looping background video, and toggleable sound.
 
